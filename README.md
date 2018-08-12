@@ -1,1 +1,1 @@
-# News_project
+# news_blog
