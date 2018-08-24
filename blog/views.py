@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
-from blog.models import UserCreateNews
+from blog.models import UserNews
 from .forms import RegisterFormView
 
 
@@ -11,7 +11,7 @@ from .forms import RegisterFormView
 
 
 def index(request):
-    news = UserCreateNews.objects.all()
+    news = UserNews.objects.all()
     return render(request, 'blog/index.html', {'news': news})
 
 
