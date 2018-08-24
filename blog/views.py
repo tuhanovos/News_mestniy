@@ -1,9 +1,10 @@
 from bootstrap4.forms import render_form
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from blog.models import UserNews
+from blog.models import UserCreateNews
 from .forms import RegisterFormView
 
 
@@ -11,8 +12,10 @@ from .forms import RegisterFormView
 
 
 def index(request):
-    news = UserNews.objects.all()
-    return render(request, 'blog/index.html', {'news': news})
+    if request.method == 'GET':
+        news = UserCreateNews.objects.all()
+        return render(request, 'blog/index.html', {'news': news})
+    return HttpResponse(status=405)
 
 
 def register_user(request):
