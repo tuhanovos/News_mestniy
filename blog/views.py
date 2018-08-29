@@ -1,4 +1,3 @@
-from bootstrap4.forms import render_form
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
