@@ -13,7 +13,7 @@ from .forms import RegisterFormView
 def index(request):
     if request.method == 'GET':
         news = UserCreateNews.objects.all()
-        return render(request, 'blog/index.html', {'news': news})
+        return render(request, 'index.html', {'news': news})
     return HttpResponse(status=405)
 
 
@@ -25,7 +25,7 @@ def register_user(request):
             return redirect('blog')
     else:
         form = RegisterFormView()
-    return render(request, 'blog/register_form.html', {'form': form})
+    return render(request, 'register_form.html', {'form': form})
 
 
 def login_user(request):
@@ -39,6 +39,6 @@ def login_user(request):
             return redirect('/blog')
     else:
         form = AuthenticationForm()
-    return render(request, 'blog/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 

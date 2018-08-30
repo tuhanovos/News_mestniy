@@ -10,11 +10,29 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
-<div class="">
-<div class="header"></div>
-<div class="container">
+<div class="header">
+    <div class="top-menu">
+
+    </div>
+</div>
+<div class="container-fluid">
+<div class="row">
+
+<div class="col-lg-3">
+{% block left_block %}
+{% endblock left_block %}
+</div>
+
+<div class="col-lg-6">
 {% block content %}
 {% endblock content %}
+</div>
+
+<div class="col-lg-3">
+{% block right_block %}
+{% endblock right_block %}
+</div>
+
 </div>
 </div>
 </body>

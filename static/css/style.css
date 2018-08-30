@@ -1,4 +1,17 @@
 .header{
     height: 50px;
     background: #0c5460 fixed;
+    margin-bottom: 70px;
+}
+
+.top-menu{
+    height: 80px;
+    position: relative;
+    border-bottom: 1px solid rgba(204,204,204,1);
+}
+
+.left-block, .right-block{
+    background-color: #5e5e5e;
+    width: inherit;
+    height: 100%;
 }
