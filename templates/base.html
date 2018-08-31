@@ -12,27 +12,53 @@
 <body>
 <div class="header">
     <div class="top-menu">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            {% load menubuilder %}
+            {% menu headernavigation %}
+            <a class="navbar-brand" href="/">Местный-<i>К</i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav mr-auto">
 
+            {% for item in menuitems %}
+
+      		<li class="nav-item">
+
+            <a href="{{ item.url }}" title="{{ item.title|escape }}"  class='nav-link'>
+                {{ item.title }}
+            </a>
+                </li>
+
+    {% endfor %}
+            </ul>
+    </nav>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid main">
 <div class="row">
 
-<div class="col-lg-3">
-{% block left_block %}
-{% endblock left_block %}
-</div>
+
+{% include 'left_block.html' %}
+
 
 <div class="col-lg-6">
 {% block content %}
 {% endblock content %}
 </div>
 
-<div class="col-lg-3">
-{% block right_block %}
-{% endblock right_block %}
-</div>
 
+{% include 'right_block.html' %}
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4 text-center"><p class="fa-copy">Copyright &copy; VladEQ 2018</p></div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+</footer>
 </div>
 </div>
 </body>

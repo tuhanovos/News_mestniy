@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 {% block content %}
-    <div class="col-lg-6">
 <form method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% bootstrap_messages %}
     {% buttons submit='Зарегистрироваться'%}{% endbuttons %}
 </form>
-    </div>
 {% endblock content %}
