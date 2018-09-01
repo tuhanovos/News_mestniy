@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 
 class RegisterFormView(UserCreationForm):
+    username = forms.CharField(max_length=30, label='Имя пользователя', widget=forms.TextInput(attrs={'placeholder': ''}))
+
     email = forms.EmailField(max_length=254,
                              help_text='Это поле обязательно', widget=forms.TextInput(attrs={'placeholder': ''}))
 
@@ -15,6 +17,10 @@ class RegisterFormView(UserCreationForm):
                                 strip=False,
                                 widget=forms.PasswordInput(attrs={'placeholder': ''}),
                                 help_text='Введите ваш пароль')
+
+    password2 = forms.CharField(label="Повторите пароль",
+                                widget=forms.PasswordInput(attrs={'placeholder': ''}),
+                                help_text='Повторите пароль')
 
     class Meta:
         model = User
