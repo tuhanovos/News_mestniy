@@ -5,6 +5,6 @@
     {% csrf_token %}
     {% bootstrap_form form %}
     {% bootstrap_messages %}
-    {% buttons submit='Зарегистрироваться'%}{% endbuttons %}
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
 </form>
 {% endblock content %}

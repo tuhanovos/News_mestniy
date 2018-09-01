@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from blog.models import UserCreateNews
-from .forms import RegisterFormView
+from .forms import RegisterFormView, ProfileForm
 
 
 # Create your views here.
@@ -29,16 +29,31 @@ def register_user(request):
 
 
 def login_user(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            my_pass = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=my_pass)
-            login(request, user)
-            return redirect('/blog')
+    if request.user.is_authenticated:
+        return redirect('/')
     else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        if request.method == 'POST':
+            form = AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                my_pass = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=my_pass)
+                login(request, user)
+                return redirect('/blog')
+        else:
+            form = AuthenticationForm()
+        return render(request, 'login.html', {'form': form})
 
 
+def user_add_news(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ProfileForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = ProfileForm()
+            return render(request, 'blog/profile.html', {'form': form})
+    else:
+        return redirect('/login')
