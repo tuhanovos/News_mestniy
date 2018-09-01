@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from blog.models import UserCreateNews
 from .forms import RegisterFormView, ProfileForm
@@ -12,7 +12,7 @@ from .forms import RegisterFormView, ProfileForm
 
 def index(request):
     if request.method == 'GET':
-        news = UserCreateNews.objects.all()
+        news = UserCreateNews.objects.all().order_by('-news_date')
         return render(request, 'index.html', {'news': news})
     return HttpResponse(status=405)
 
@@ -50,10 +50,18 @@ def user_add_news(request):
         if request.method == 'POST':
             form = ProfileForm(request.POST)
             if form.is_valid():
-                form.save()
+                title = form.cleaned_data['title']
+                text = form.cleaned_data['text']
+                news = UserCreateNews(title=title, news_text=text)
+                news.save()
                 return redirect('/')
         else:
             form = ProfileForm()
             return render(request, 'blog/profile.html', {'form': form})
     else:
         return redirect('/login')
+
+
+def view_one_post(request, news_id):
+    post = UserCreateNews.objects.get(pk=news_id)
+    return render(request, 'blog/post.html', {'post': post})

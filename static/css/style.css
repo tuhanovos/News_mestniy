@@ -43,3 +43,13 @@ footer p{
 .form{
     margin: 0.7rem 3rem;
 }
+
+.block-news{
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.h1, h1{
+    font-size: 2rem;
+}
