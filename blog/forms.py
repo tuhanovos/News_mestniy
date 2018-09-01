@@ -3,8 +3,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+"""
+Форма регистрации пользователя на сайте
+"""
+
+
 class RegisterFormView(UserCreationForm):
-    username = forms.CharField(max_length=30, label='Имя пользователя', widget=forms.TextInput(attrs={'placeholder': ''}))
+    username = forms.CharField(max_length=30, label='Имя пользователя',
+                               widget=forms.TextInput(attrs={'placeholder': ''}))
 
     email = forms.EmailField(max_length=254,
                              help_text='Это поле обязательно', widget=forms.TextInput(attrs={'placeholder': ''}))
@@ -25,6 +31,11 @@ class RegisterFormView(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'address', 'password1', 'password2',)
+
+
+"""
+Форма добавления новости в блог
+"""
 
 
 class ProfileForm(forms.Form):
