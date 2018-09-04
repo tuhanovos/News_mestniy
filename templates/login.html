@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+    {% if auth == False %}
+        <form method="post" class="form">
+            {% csrf_token %}
+            {%  bootstrap_form form %}
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    {% else %}
+        <h3 class="h3 text-center">Вы уже вошли</h3>
+    {% endif %}
+
+{% endblock content %}
