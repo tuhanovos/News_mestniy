@@ -1,9 +1,0 @@
-{% extends 'blog/base.html' %}
-{% load bootstrap4 %}
-{% block content %}
-{% for new in news %}
-    <h1>{{ new.title }}</h1>
-    <p class="icon-bar"><i>Дата публикации: {{ new.news_date }}</i></p>
-    <div>{{ new.news_text }}</div>
-    {% endfor %}
-{% endblock content %}
