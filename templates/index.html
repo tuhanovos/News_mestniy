@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+{% for new in news %}
+    <!--Вывод всех новостей-->
+    <div class="row">
+    <div class="col-lg-12 block-news">
+        <h5><span class="badge badge-secondary">{{ new.news_date }}</span></h5>
+    <div class="media">
+
+        {% if new.news_image %}
+
+            <img src="/media/{{ new.news_image }}" class="mr-3 w-25">
+        {% else %}
+            <img src="{% static 'image/134703850_w640_h640_no_foto.png' %}" class="mr-3 w-25">
+        {% endif %}
+
+        <div class="media-body">
+            <h1 class="mt-0 w-100"><a href="{% url 'blog:post' new.id %}" >{{ new.title }}</a></h1>
+            {% autoescape off %}{{ new.description|striptags|truncatewords:30 }}{% endautoescape %}
+        </div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
