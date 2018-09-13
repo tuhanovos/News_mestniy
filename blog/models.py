@@ -7,11 +7,28 @@ Rus: Это модель профиля пользователя в которо
 """
 
 
+class CategoriesNews(models.Model):
+    categories_news = models.CharField(
+        max_length=100,
+        name='categories_news',
+        verbose_name='Категории новостей',
+        null=True)
+
+    class Meta:
+        verbose_name = 'Категории новостей'
+        verbose_name_plural = 'Категории новостей'
+
+    def __str__(self):
+        return self.categories_news
+
+
 class UserCreateNews(models.Model):
     title = models.CharField(max_length=100, name='title', verbose_name='Заголовок новости')
     news_date = models.DateTimeField(auto_now=True, verbose_name='Дата публикации')
     news_image = models.ImageField(verbose_name='Изображение', null=True, blank=True, upload_to='images/')
     description = RichTextUploadingField(blank=True, null=True, verbose_name='Текст новости')
+    categories_news = models.ForeignKey(CategoriesNews, on_delete=models.CASCADE)
+    score = models.PositiveIntegerField(verbose_name='Количество просмотров', name='score', default=0)
 
     class Meta:
         verbose_name = 'Новости'
@@ -19,4 +36,3 @@ class UserCreateNews(models.Model):
 
     def __str__(self):
         return self.title
-
