@@ -42,6 +42,7 @@ class RegisterFormView(UserCreationForm):
 class ProfileForm(forms.Form):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': ''}), max_length=150,
                             label='Заголовок новости')
+    categories_news = forms.ChoiceField(choices=(()), label='Категория')
     text = forms.CharField(widget=CKEditorWidget(config_name='default'), label='Текст новости')
-    image = RichTextUploadingField()
+    image = forms.ImageField(label='Загрузить изображение')
 
