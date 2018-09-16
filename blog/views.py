@@ -4,6 +4,7 @@ from django.core.files.uploadhandler import FileUploadHandler
 from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.utils.datastructures import MultiValueDictKeyError
 
 from blog.models import UserCreateNews, CategoriesNews
 from .forms import RegisterFormView, ProfileForm
@@ -79,13 +80,16 @@ def user_add_news(request):
                                       description=text,
                                       categories_news=category_id,
                                       news_image=image)
-                FileUploadHandler(request.FILES['image'])
+                try:
+                    FileUploadHandler(request.FILES['image'])
+                except MultiValueDictKeyError:
+                    pass
                 news.save()
                 return redirect('/')
             return redirect('/')
         else:
             form = ProfileForm()
-            return render(request, 'blog/profile.html', {'form': form})
+            return render(request, 'blog/add_post.html', {'form': form})
     else:
         return redirect('/login')
 

@@ -21,17 +21,18 @@ from django.conf import settings
 from blog.views import index, register_user, login_user
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
-    path('registration/', register_user, name='registration'),
-    path('login/', login_user, name='login'),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    re_path(r'^api-auth/', include('rest_framework.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('', index, name='index'),
+                  path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
+                  path('registration/', register_user, name='registration'),
+                  path('login/', login_user, name='login'),
+                  path('ckeditor/', include('ckeditor_uploader.urls')),
+                  re_path(r'^api-auth/', include('rest_framework.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns +=[
+
+    urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls))
     ]

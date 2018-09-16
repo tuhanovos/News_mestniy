@@ -1,3 +1,7 @@
+body{
+    font-family: 'Roboto',sans-serif;
+}
+
 .header{
     height: 70px;
     background: #0c5460 fixed;
@@ -7,10 +11,14 @@
     width: 100%;
 }
 
+.header-text{
+    font-family: Lobster, serif;
+}
+
 .top-menu{
     position: relative;
     border-bottom: 1px solid rgba(204,204,204,1);
-    margin-top: 70px;
+    margin-top: 8px;
 }
 
 .top-menu nav{
@@ -52,4 +60,8 @@ footer p{
 
 .h1, h1{
     font-size: 1.5rem;
-}ий
+}
+
+.h6, h6 {
+    font-size: .9rem;
+}

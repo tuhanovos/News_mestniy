@@ -47,5 +47,5 @@ class ProfileForm(forms.Form):
                             label='Заголовок новости')
     categories_news = forms.ChoiceField(choices=CHOICES, label='Выберите категорию')
     text = forms.CharField(widget=CKEditorUploadingWidget(config_name='default'), label='Текст новости')
-    image = forms.ImageField(label='Загрузить изображение', allow_empty_file=False)
+    image = forms.ImageField(label='Загрузить изображение', required=False)
 
