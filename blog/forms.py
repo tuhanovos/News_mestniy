@@ -1,8 +1,9 @@
-from ckeditor.widgets import CKEditorWidget
-from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+from blog.models import CategoriesNews
 
 """
 Форма регистрации пользователя на сайте
@@ -40,9 +41,11 @@ class RegisterFormView(UserCreationForm):
 
 
 class ProfileForm(forms.Form):
+    CHOICES = CategoriesNews.objects.all().values_list('id', 'categories_news')
+
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': ''}), max_length=150,
                             label='Заголовок новости')
-    categories_news = forms.ChoiceField(choices=(()), label='Категория')
-    text = forms.CharField(widget=CKEditorWidget(config_name='default'), label='Текст новости')
-    image = forms.ImageField(label='Загрузить изображение')
+    categories_news = forms.ChoiceField(choices=CHOICES, label='Выберите категорию')
+    text = forms.CharField(widget=CKEditorUploadingWidget(config_name='default'), label='Текст новости')
+    image = forms.ImageField(label='Загрузить изображение', allow_empty_file=False)
 

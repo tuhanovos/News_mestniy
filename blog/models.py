@@ -1,6 +1,6 @@
+# coding=utf-8
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
-
 """ 
 En: This is the model of the user profile in which he adds the news
 Rus: Это модель профиля пользователя в которой он добавляет новость
@@ -15,7 +15,7 @@ class CategoriesNews(models.Model):
         null=True)
 
     class Meta:
-        verbose_name = 'Категории новостей'
+        verbose_name = 'Категория новостей'
         verbose_name_plural = 'Категории новостей'
 
     def __str__(self):
@@ -27,7 +27,10 @@ class UserCreateNews(models.Model):
     news_date = models.DateTimeField(auto_now=True, verbose_name='Дата публикации')
     news_image = models.ImageField(verbose_name='Изображение', null=True, blank=True, upload_to='images/')
     description = RichTextUploadingField(blank=True, null=True, verbose_name='Текст новости')
-    categories_news = models.ForeignKey(CategoriesNews, on_delete=models.CASCADE)
+    categories_news = models.ForeignKey(CategoriesNews,
+                                        on_delete=models.CASCADE,
+                                        verbose_name='Категория',
+                                        unique=False)
     score = models.PositiveIntegerField(verbose_name='Количество просмотров', name='score', default=0)
 
     class Meta:
